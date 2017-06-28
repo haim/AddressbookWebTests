@@ -165,8 +165,7 @@ public class ApplicationManager   {
 		    	groupHelper = new GroupHelper( driver);	
 		    	navigationHelper = new NavigationHelper( driver);
 		    	contactsHelper = new ContactsHelper(driver);
-		    	sessionHelper = new SessionHelper(driver);
-		    	
+		    	sessionHelper = new SessionHelper(driver);	
 		    	sessionHelper.  login("admin", "secret");
 	}
 
