@@ -20,14 +20,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
-import apilipen.addressbook.model.ContactData;
-import apilipen.addressbook.model.GroupData;
+public class ApplicationManager   {
+	private WebDriver driver;
+	
+    private GroupHelper  groupHelper; 
+	private NavigationHelper navigationHelper;
+	private ContactsHelper contactsHelper;
+	private SessionHelper sessionHelper;
+	
 
-public class ApplicationManager {
-
-	static WebDriver driver;
-
-	public static void setWebDriver(String browser) throws IOException {
+	public  void setWebDriver(String browser) throws IOException {
 	
 	
 	               Logger logger = Logger.getLogger("");
@@ -158,94 +160,26 @@ public class ApplicationManager {
 		//	           String in_browser = System.getProperty("browser");
 		String in_browser = "Chrome"; // Firefox or Chrome or Safari or IE or Edge
 		      setWebDriver(in_browser);
-		     // String url = "http://alex.academy/ua";
-		     // String url = "http://localhost/addressbook/index.php";
-		    //  driver.get(url);
-		     // String ua = driver.findElement(By.id("id_ua")).getText(); 
-		      
-		    	driver.get("http://localhost/addressbook/index.php");  
-		        login("admin", "secret");
+		    	driver.get("http://localhost/addressbook/index.php"); 
+		    	
+		    	groupHelper = new GroupHelper( driver);	
+		    	navigationHelper = new NavigationHelper( driver);
+		    	contactsHelper = new ContactsHelper(driver);
+		    	sessionHelper = new SessionHelper(driver);
+		    	
+		    	sessionHelper.  login("admin", "secret");
 	}
 
-	public void login(String username, String password) {
 	
-		  driver.findElement(By.name("user")).click();
-		  driver.findElement(By.name("user")).clear();	
-		driver.findElement(By.name("user")).sendKeys(username);
-		
-		  driver.findElement(By.name("pass")).click();
-		  driver.findElement(By.name("pass")).clear();
-		  driver.findElement(By.name("pass")).sendKeys(password);
-		  driver.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-	}
-
-	public void returnToGroupPage() {
-		driver.findElement(By.linkText("group page")).click();
-	}
-
-	public void submitGroupCreation() {
-		driver.findElement(By.name("submit")).click();
-	}
-
-	public void fillGroupForm(GroupData groupData) {
-		driver.findElement(By.name("group_name")).click();
-		  driver.findElement(By.name("group_name")).clear();
-		  driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
-		  driver.findElement(By.name("group_header")).click();
-		  driver.findElement(By.name("group_header")).clear();
-		  driver.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-		  driver.findElement(By.name("group_footer")).click();
-		  driver.findElement(By.name("group_footer")).clear();
-		  driver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
-	}
-
-	public void initGropCreation() {
-		driver.findElement(By.name("new")).click();
-	}
-
-	public void gotoGroupPage() {
-		driver.findElement(By.linkText("groups")).click();
-	}
-
+	
+	
+	
+	
 	public void stop() {
 		driver.quit();
 	}
 
-	public void deleteSelectedGroup() {
-		driver.findElement(By.name("delete")).click();
-	}
-
-	public void selectGroup() {
-		driver.findElement(By.name("selected[]")).click();
-	}
-
-	public void fillContactCreation(ContactData contactData) {
-		driver.findElement(By.name("firstname")).click();
-		driver.findElement(By.name("firstname")).clear();
-		driver.findElement(By.name("firstname")).sendKeys(contactData.getFname());
-		driver.findElement(By.name("lastname")).click();
-		driver.findElement(By.name("lastname")).clear();
-		driver.findElement(By.name("lastname")).sendKeys(contactData.getLname());
-		driver.findElement(By.name("address")).click();
-		driver.findElement(By.name("address")).clear();
-		driver.findElement(By.name("address")).sendKeys(contactData.getAddr());
-		driver.findElement(By.name("home")).click();
-		driver.findElement(By.name("home")).clear();
-		driver.findElement(By.name("home")).sendKeys(contactData.getPhone());
-		driver.findElement(By.name("email")).click();
-		driver.findElement(By.name("email")).clear();
-		driver.findElement(By.name("email")).sendKeys(contactData.getEmail());
-	}
-
-	public void submitContactCreation() {
-		driver.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-	}
-
-	public void gotoContactPage() {
-		driver.findElement(By.linkText("add new")).click();
-	}
-
-	public static boolean isAlertPresent(FirefoxDriver wd) {
+	public  boolean isAlertPresent() {
 	    try {
 	    	driver.switchTo().alert();
 	        return true;
@@ -253,5 +187,24 @@ public class ApplicationManager {
 	        return false;
 	    }
 	}
+
+	public GroupHelper getGroupHelper() {
+		return groupHelper;
+	}
+
+	public void setGroupHelper(GroupHelper groupHelper) {
+		this.groupHelper = groupHelper;
+	}
+	
+	
+	public NavigationHelper getNavigationHelper() {
+		return navigationHelper;
+	}
+	
+	public ContactsHelper getContactsHelper() {
+		return contactsHelper;
+	}
+	
+	
 
 }
