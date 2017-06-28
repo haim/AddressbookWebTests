@@ -1,4 +1,4 @@
-package core;
+package apilipen.addressbook.model;
 
 public class GroupData {
 	
