@@ -1,5 +1,4 @@
-package apilipen.addressbook.appmanager
-;
+package apilipen.addressbook.appmanager;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -178,22 +177,15 @@ public class ApplicationManager   {
 		driver.quit();
 	}
 
-	public  boolean isAlertPresent() {
-	    try {
-	    	driver.switchTo().alert();
-	        return true;
-	    } catch (NoAlertPresentException e) {
-	        return false;
-	    }
-	}
+	
 
 	public GroupHelper getGroupHelper() {
 		return groupHelper;
 	}
 
-	public void setGroupHelper(GroupHelper groupHelper) {
-		this.groupHelper = groupHelper;
-	}
+//	public void setGroupHelper(HelperBase groupHelper) {
+//		this.groupHelper = groupHelper;
+//	}
 	
 	
 	public NavigationHelper getNavigationHelper() {

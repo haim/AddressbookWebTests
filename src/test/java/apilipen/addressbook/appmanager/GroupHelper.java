@@ -5,46 +5,42 @@ import org.openqa.selenium.WebDriver;
 
 import apilipen.addressbook.model.GroupData;
 
-public class GroupHelper {
+public class GroupHelper extends HelperBase {
 
-	private WebDriver driver;
-
-
-	
- GroupHelper(WebDriver wd) {
-	  this.driver = wd;
+	GroupHelper(WebDriver wd) {
+	//  this.driver = wd;
+	  super(wd);
 	}
 
 	public void returnToGroupPage() {
-		driver.findElement(By.linkText("group page")).click();
+		clickElement(By.linkText("group page"));
 	}
 
 	public void submitGroupCreation() {
-		driver.findElement(By.name("submit")).click();
+		clickElement(By.name("submit"));
 	}
+
+	
 
 	public void fillGroupForm(GroupData groupData) {
-		driver.findElement(By.name("group_name")).click();
-		  driver.findElement(By.name("group_name")).clear();
-		  driver.findElement(By.name("group_name")).sendKeys(groupData.getName());
-		  driver.findElement(By.name("group_header")).click();
-		  driver.findElement(By.name("group_header")).clear();
-		  driver.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-		  driver.findElement(By.name("group_footer")).click();
-		  driver.findElement(By.name("group_footer")).clear();
-		  driver.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+	      setText(By.name("group_name"), groupData.getName());
+	      setText(By.name("group_header"), groupData.getHeader());
+	      setText(By.name("group_footer"), groupData.getFooter());
+
 	}
 
+	
 	public void initGropCreation() {
-		driver.findElement(By.name("new")).click();
+		clickElement(By.name("new"));
 	}
 
 	public void deleteSelectedGroup() {
-		driver.findElement(By.name("delete")).click();
+		clickElement(By.name("delete"));
 	}
 
 	public void selectGroup() {
-		driver.findElement(By.name("selected[]")).click();
+		clickElement(By.name("selected[]"));
 	}
 
+	
 }
