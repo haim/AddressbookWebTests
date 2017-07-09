@@ -40,10 +40,6 @@ public class ContactsHelper extends HelperBase {
 
 
 
-//	public void gotoHomePage() {
-//		
-//		
-//	}
 
 	public void selectContact() {
 		clickElement(By.name("selected[]" ));
