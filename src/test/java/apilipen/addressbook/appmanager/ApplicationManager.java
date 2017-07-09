@@ -155,6 +155,9 @@ public class ApplicationManager   {
 	               }
 	        }
 
+	
+	
+	
 	public void init() throws IOException {
 		//	           String in_browser = System.getProperty("browser");
 		String in_browser = "Chrome"; // Firefox or Chrome or Safari or IE or Edge

@@ -42,5 +42,16 @@ public class GroupHelper extends HelperBase {
 		clickElement(By.name("selected[]"));
 	}
 
+	public void initGroupModification() {
+		clickElement(By.name("edit"));
+		
+	}
+
+	public void submitGroupModification() {
+		clickElement(By.name("update"));
+		
+		
+	}
+
 	
 }

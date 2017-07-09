@@ -21,7 +21,7 @@ public void setUp() throws Exception {
 
 	@AfterMethod
 	public void tearDown() {
-		app.stop();
+	app.stop();
 	}
 	
 	
