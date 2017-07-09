@@ -57,14 +57,24 @@ public class ContactsHelper extends HelperBase {
 	}
 
 	public void initUpdateContuct() {
-	//	clickElement(By.xpath("//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-		//.//*[@id='maintable']/tbody/tr[2]/td[8]/a/img        "//img[@title='Edit']"
+
 		clickElement(By.xpath("//a/img[@title=\"Edit\"]"));
 	}
 
 	public void submitContactDeleation() {
-		// TODO Auto-generated method stub
 		clickElement(By.name("update"));
+	}
+
+	public void createContact(ContactData contactData, boolean b) {	
+		
+  	  fillContactCreation(contactData, b );  	
+  	  submitContactCreation();
+		
+	}
+
+	public boolean isThereAContact() {
+		// TODO Auto-generated method stub
+		return isElementPresent(By.name("selected[]"));
 	}
 
 

@@ -12,7 +12,17 @@ public class ContactModificationTests extends TestBase{
 	
   @Test
   public void testContactModification() {
-	 // app.getNavigationHelper().gotoHomePage(); 
+	 // app.getNavigationHelper().gotoHomePage();  
+	  
+	  
+	  if (! app.getContactsHelper().isThereAContact()) {
+	  app.getNavigationHelper().gotoContactPage(); 
+	  app.getContactsHelper().createContact(new ContactData("Winny", "Pooh", 
+			  "1223 Sonate way MV, CA 94040", "9663457889", "sokolsky@list.ru", "testB"), true );
+  }
+	  
+
+	  
 	  app.getContactsHelper().initUpdateContuct();
 	  app.getContactsHelper()
 	  		.fillContactCreation(new ContactData("Sara", "Moore", "1223, Ednamary way MV, CA 94040", "9663457889", "sokolsky@list.ru" , null ), false );  	
