@@ -1,4 +1,6 @@
 package apilipen.addressbook.tests;
+import java.util.List;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,16 +13,18 @@ public class GroupDeletionTests extends TestBase {
     @Test
     public void GroupDeletionTests() {
     	  app.getNavigationHelper().gotoGroupPage();  
-    	  int before = app.getGroupHelper().getGroupCount(); 
+    
     	  if (! app.getGroupHelper().isThereAGroup()) {
     		  app.getGroupHelper().createGroup(new GroupData("testC", "testC", "testC"));
     	  }
-    	  app.  getGroupHelper().selectGroup(before - 2);  
+    	  
+  		List <GroupData> before = app.getGroupHelper().getGroupList() ;
+    	  app.  getGroupHelper().selectGroup(before.size() - 1);  
     	  app.  getGroupHelper().deleteSelectedGroup();
     	  app.  getGroupHelper().returnToGroupPage();
-    	  int after = app.getGroupHelper().getGroupCount();
+    	  List <GroupData>  after = app.getGroupHelper().getGroupList();
     	  
-          Assert.assertEquals(after  , before -1);
+          Assert.assertEquals(after.size()  , before.size()-1);
     }
     
   
