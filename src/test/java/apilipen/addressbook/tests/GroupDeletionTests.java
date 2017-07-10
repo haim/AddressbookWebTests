@@ -10,7 +10,7 @@ public class GroupDeletionTests extends TestBase {
     
 
     
-    @Test
+    @Test(enabled = false)
     public void GroupDeletionTests() {
     	  app.getNavigationHelper().gotoGroupPage();  
     
@@ -26,6 +26,36 @@ public class GroupDeletionTests extends TestBase {
     	  
           Assert.assertEquals(after.size()  , before.size()-1);
     }
+ 
     
+    
+    @Test
+    public void GroupDeletionTests2() {
+    	  app.getNavigationHelper().gotoGroupPage();  
+    
+    	  if (! app.getGroupHelper().isThereAGroup()) {
+    		  app.getGroupHelper().createGroup(new GroupData("testC", "testC", "testC"));
+    	  }
+    	  
+  		List <GroupData> before = app.getGroupHelper().getGroupList() ;
+    	  app.  getGroupHelper().selectGroup(before.size() - 1);  
+    	  app.  getGroupHelper().deleteSelectedGroup();
+    	  app.  getGroupHelper().returnToGroupPage();
+    	  List <GroupData>  after = app.getGroupHelper().getGroupList();
+    	  
+          Assert.assertEquals(after.size()  , before.size()-1);
+          
+          before.remove(before.size()-1); // removing from old List deleted element
+          // compare in each elements in Lists
+          
+      // but, we can do  :
+//                   for (int i = 0 ; i < after.size() ; i ++ ) {
+//        	       Assert.assertEquals(before.get(i), after.get(i));
+//          			}
+    
+          Assert.assertEquals(before, after);
+          
+    
+    } 
   
-}
+} // End of class
