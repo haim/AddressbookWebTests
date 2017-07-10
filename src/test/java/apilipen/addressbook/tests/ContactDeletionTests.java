@@ -18,8 +18,7 @@ public class ContactDeletionTests extends TestBase {
 		  app.getNavigationHelper().gotoContactPage(); 
 		  app.getContactsHelper().createContact(new ContactData("Winny", "Pooh", 
     			  "1223 Sonate way MV, CA 94040", "9663457889", "sokolsky@list.ru", "testB"), true );
-	  }
-	  
+	  } 
 	  app.getContactsHelper().selectContact();	  
 	  app.getContactsHelper().submitDeletionContuct();
 	  app.getNavigationHelper().gotoHomePage(); 
