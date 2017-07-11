@@ -1,16 +1,16 @@
 package apilipen.addressbook.tests;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import apilipen.addressbook.appmanager.ApplicationManager;
 
 public class TestBase  {
 
 	
-	public final ApplicationManager app = new ApplicationManager();
+	public static final ApplicationManager app = new ApplicationManager();
 	
 	
-	@BeforeMethod
+	@BeforeSuite
 public void setUp() throws Exception {
 		app.init();
 		   }
@@ -19,7 +19,7 @@ public void setUp() throws Exception {
 
 
 
-	@AfterMethod
+	@AfterSuite
 	public void tearDown() {
 	app.stop();
 	}

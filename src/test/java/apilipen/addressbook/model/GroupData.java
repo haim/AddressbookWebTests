@@ -16,7 +16,7 @@ public class GroupData {
 	}
 	
 	public GroupData( String name, String header, String footer) {
-		this.id = 0;
+		this.id = Integer.MAX_VALUE;
 		this.name = name;
 		this.header = header;
 		this.footer = footer;
@@ -49,7 +49,6 @@ public class GroupData {
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + id;
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	return result;
 }
@@ -66,8 +65,6 @@ public int hashCode() {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupData other = (GroupData) obj;
-		if (id != other.id)
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -79,6 +76,18 @@ public int hashCode() {
 	public void setId(int ide) {
 		// TODO Auto-generated method stub
 		this.id = ide;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
+	}
+
+	public void setFooter(String footer) {
+		this.footer = footer;
 	}
 
 

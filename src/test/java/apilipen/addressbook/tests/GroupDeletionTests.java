@@ -2,60 +2,51 @@ package apilipen.addressbook.tests;
 import java.util.List;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import apilipen.addressbook.model.GroupData;
 
 public class GroupDeletionTests extends TestBase {
     
-
+	@BeforeMethod
+	public void ensurePreconditions (){
+		 app.goTo().groupPage(); 
+		  if (app.group().list().size() == 0) {
+			  app.group().create(new GroupData("test3", "test3", "testC3"));
+		  }
+	}
     
     @Test(enabled = false)
     public void GroupDeletionTests() {
-    	  app.getNavigationHelper().gotoGroupPage();  
-    
-    	  if (! app.getGroupHelper().isThereAGroup()) {
-    		  app.getGroupHelper().createGroup(new GroupData("testC", "testC", "testC"));
-    	  }
+    	
     	  
-  		List <GroupData> before = app.getGroupHelper().getGroupList() ;
-    	  app.  getGroupHelper().selectGroup(before.size() - 1);  
-    	  app.  getGroupHelper().deleteSelectedGroup();
-    	  app.  getGroupHelper().returnToGroupPage();
-    	  List <GroupData>  after = app.getGroupHelper().getGroupList();
+  		List <GroupData> before = app.group().list() ;
+  		int index = before.size() - 1;
+  		app.  group().  delete(index);
+    	  List <GroupData>  after = app.group().list();
     	  
-          Assert.assertEquals(after.size()  , before.size()-1);
+          Assert.assertEquals(after.size()  , index);
     }
  
     
    // "Comparesing whole Lists of groups before and after deletion" 
     @Test
     public void GroupDeletionTests2() {
-    	  app.getNavigationHelper().gotoGroupPage();  
     
-    	  if (! app.getGroupHelper().isThereAGroup()) {
-    		  app.getGroupHelper().createGroup(new GroupData("testC", "testC", "testC"));
-    	  }
     	  
-  		List <GroupData> before = app.getGroupHelper().getGroupList() ;
-    	  app.  getGroupHelper().selectGroup(before.size() - 1);  
-    	  app.  getGroupHelper().deleteSelectedGroup();
-    	  app.  getGroupHelper().returnToGroupPage();
-    	  List <GroupData>  after = app.getGroupHelper().getGroupList();
-    	  
-          Assert.assertEquals(after.size()  , before.size()-1);
-          
-          before.remove(before.size()-1); // removing from old List deleted element
-          // compare in each elements in Lists
-          
-      // but, we can do  :
-//                   for (int i = 0 ; i < after.size() ; i ++ ) {
-//        	       Assert.assertEquals(before.get(i), after.get(i));
-//          			}
-    
-          Assert.assertEquals(before, after);
+  		List <GroupData> before = app.group().list() ;
+  		int index = before.size() - 1;
+  		app.group().delete(index);
+    	List <GroupData>  after = app.group().list();
+    	Assert.assertEquals(after.size()  ,before.size() - 1);
+         
+        before.remove(index);
+        Assert.assertEquals(before, after);
           
     
-    } 
+    }
+
+
   
 } // End of class

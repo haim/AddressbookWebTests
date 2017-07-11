@@ -182,16 +182,12 @@ public class ApplicationManager   {
 
 	
 
-	public GroupHelper getGroupHelper() {
+	public GroupHelper group() {
 		return groupHelper;
 	}
-
-//	public void setGroupHelper(HelperBase groupHelper) {
-//		this.groupHelper = groupHelper;
-//	}
 	
 	
-	public NavigationHelper getNavigationHelper() {
+	public NavigationHelper goTo() {
 		return navigationHelper;
 	}
 	

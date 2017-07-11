@@ -10,18 +10,18 @@ public class ContactDeletionTests extends TestBase {
 	
 	
 	
-  @Test
+  @Test (enabled = false)
   public void  contactDeletionTest() {
-	  app.getNavigationHelper().gotoHomePage(); 
+	  app.goTo().gotoHomePage(); 
 	  
 	  if (! app.getContactsHelper().isThereAContact()) {
-		  app.getNavigationHelper().gotoContactPage(); 
+		  app.goTo().gotoContactPage(); 
 		  app.getContactsHelper().createContact(new ContactData("Winny", "Pooh", 
     			  "1223 Sonate way MV, CA 94040", "9663457889", "sokolsky@list.ru", "testB"), true );
 	  } 
 	  app.getContactsHelper().selectContact();	  
 	  app.getContactsHelper().submitDeletionContuct();
-	  app.getNavigationHelper().gotoHomePage(); 
+	  app.goTo().gotoHomePage(); 
 	  
 	  
   }
