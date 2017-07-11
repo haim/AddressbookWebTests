@@ -10,44 +10,12 @@ import apilipen.addressbook.model.GroupData;
 
 public class GroupCreationTests  extends TestBase {
 	
-	
-	
-	
-	   @Test (enabled = false)
-	    public void testGroupCreation() {	
-		   app.goTo().groupPage();  
-		   
-		// modifacation "int"   to List:    int before = app.getGroupHelper().getGroupCount(); 	
-		List <GroupData> before = app.group().list() ; //	 with new method getGroupList()  
-		  GroupData newGroup = new GroupData("testR", "testR", "testR");
- // before.get(before.size() - 1).getId(),
-		app.group().create(newGroup);
-		  
-		   List <GroupData>  after = app.group().list();
-	        Assert.assertEquals(after.size() , before.size() + 1);
-	        
-	        
-	        // add to old List new created group
-
-
-	// calculating max indeficator of new     created group 
-	        int max = 0;
-	        for (GroupData g : after){
-	        	 if (g.getId() > max)  {max =  g.getId();  }
-	        }
-
-	        newGroup.setId(max);
-		    before .add(newGroup);
-	        Assert.assertEquals( new HashSet<Object>(before),    new HashSet<Object>(after));
-	   }
-
-
 
 	@Test
 	public void testGroupCreation2() {
 		app.goTo().groupPage();
 		List<GroupData> before = app.group().list(); //	 with new method getGroupList()
-		GroupData newGroup = new GroupData("testR", "testR", "testR");
+		GroupData newGroup = new GroupData().withName("testR").withHeader("testR").withFooter("testR");
 		app.group().create(newGroup);
 
 		List<GroupData> after = app.group().list();

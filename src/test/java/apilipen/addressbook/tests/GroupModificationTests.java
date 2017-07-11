@@ -17,68 +17,28 @@ public class GroupModificationTests  extends TestBase {
 		 app.goTo().groupPage();  
 		  
 		  if (app.group().list().size() == 0) {
-			  app.group().create(new GroupData("test3", "test3", "testC3"));
+			  app.group().create(new GroupData()
+					  .withName("test3")
+					  .withHeader("test3")
+					  .withFooter("test3"));
 		  }
 	}
 	
-	
-	
-	
-  @Test (enabled = false)
-  public void testGroupModification() {
-	  
-	 
-		List <GroupData> before = app.group().list() ; //	 with new method getGroupList()  
-
-	  app.  group().selectGroup(before.size() - 1);  
-	  app.  group().initGroupModification();
-	  app. group().  fillGroupForm(new GroupData("testQA", "testQA","testQA"));
-	  app.group().submitGroupModification();
-	  app. group().  returnToGroupPage();
-	  
-	  List <GroupData>  after = app.group().list();
-      Assert.assertEquals(after.size()  , before.size());
-  
-	  
-  }
-  
-  @Test (enabled = false)
-  public void testGroupModification2() {
-	  
-	 
-	  //  Modifacation test to compare Lists with different order of elements (after modification groups)
-		List <GroupData> before = app.group().list() ; //	 with new method getGroupList()  
-
-	  app.  group().selectGroup(before.size() - 1);  
-	  app.  group().initGroupModification();
-	  
-	  GroupData newGroup = new GroupData(before.get(before.size() - 1).getId(),"testA", "testA","testA");
-	  
-	  app. group().  fillGroupForm (newGroup);
-	  app.group().submitGroupModification();
-	  app. group().  returnToGroupPage();
-	  
-	  List <GroupData>  after = app.group().list();
-      Assert.assertEquals(after.size()  , before.size());
-  
-      // delete old group
-	  before.remove(before.size() - 1);
-	  // aadd new group to old List
-	  before.add(newGroup);   // now old List and new should be equal
-	  // but they have different order of groups. Use unordered Collection
-	   Assert.assertEquals( new HashSet<Object>(before),    new HashSet<Object>(after));
-	  
-  }
-
   
   
   @Test
-  public void testGroupModification3() {
+  public void testGroupModification() {
 	  
 	  
 	  List <GroupData> before = app.group().list() ;
 	  int index = before.size() - 1;
-	  GroupData newGroup = new GroupData(before.get(index).getId(),"testA", "testA","testA"); 
+	  GroupData newGroup = new GroupData()
+			  .withId( before.get(index).getId() )
+			  .withName("testM")
+			  .withHeader("testM")
+			  .withFooter("testM");
+
+		
 	  app.group().modify(index, newGroup);	  
 	  List <GroupData>  after = app.group().list();
       Assert.assertEquals(after.size()  , before.size());
