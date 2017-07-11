@@ -1,5 +1,6 @@
 package apilipen.addressbook.tests;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -20,12 +21,13 @@ public class GroupDeletionTests extends TestBase {
 			
 		  }
 	}
-    
+ 
+	
+	
     @Test(enabled = false)
     public void GroupDeletionTests() {
     	
-    	  
-  		List <GroupData> before = app.group().list() ;
+ 	List <GroupData> before = app.group().list() ;
   		int index = before.size() - 1;
   		app.  group().  delete(index);
     	  List <GroupData>  after = app.group().list();
@@ -35,7 +37,7 @@ public class GroupDeletionTests extends TestBase {
  
     
    // "Comparesing whole Lists of groups before and after deletion" 
-    @Test
+    @Test(enabled = false)
     public void GroupDeletionTests2() {
     
     	  
@@ -51,6 +53,20 @@ public class GroupDeletionTests extends TestBase {
     
     }
 
+    @Test
+    public void GroupDeletionTests3() {  
+  		Set <GroupData> before = app.group().allGroupslist() ;
+  		GroupData deletedGroup = before.iterator().next();
+  	
+  		app.group().delete(deletedGroup);
+  		Set <GroupData>  after = app.group().allGroupslist();
+    	Assert.assertEquals(after.size()  ,before.size() - 1);
+         
+        before.remove(deletedGroup);
+        Assert.assertEquals(before, after);
+          
+    
+    }
 
   
 } // End of class

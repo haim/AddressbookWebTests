@@ -3,6 +3,7 @@ package apilipen.addressbook.tests;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +12,7 @@ import apilipen.addressbook.model.GroupData;
 public class GroupCreationTests  extends TestBase {
 	
 
-	@Test
+	@Test (enabled = false)
 	public void testGroupCreation2() {
 		app.goTo().groupPage();
 		List<GroupData> before = app.group().list(); //	 with new method getGroupList()
@@ -31,8 +32,29 @@ public class GroupCreationTests  extends TestBase {
 	}
 
 
+	@Test
+	public void testGroupCreation3() {
+		app.goTo().groupPage();
+		Set<GroupData> before = app.group().allGroupslist(); //	 with new method getGroupList()
+		GroupData newGroup = new GroupData().withName("testR").withHeader("testR").withFooter("testR");
+		app.group().create(newGroup);
 
+		Set<GroupData> after = app.group().allGroupslist();
+		Assert.assertEquals(after.size(), before.size() + 1);
 
+		newGroup.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+		before .add(newGroup);
+
+		  Assert.assertEquals( before, after);
+	}
+
+	
+	
+	
+	
+	
+	
+	
 	// add to old List new created group
 
 

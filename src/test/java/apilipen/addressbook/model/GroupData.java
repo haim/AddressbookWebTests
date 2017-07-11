@@ -31,9 +31,10 @@ public class GroupData {
 
 
 @Override
-	public int hashCode() {
+public int hashCode() {
 	final int prime = 31;
 	int result = 1;
+	result = prime * result + id;
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	return result;
 }
@@ -48,6 +49,8 @@ public class GroupData {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupData other = (GroupData) obj;
+		if (id != other.id)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;

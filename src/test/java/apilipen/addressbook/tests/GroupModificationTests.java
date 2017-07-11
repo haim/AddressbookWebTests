@@ -3,6 +3,7 @@ package apilipen.addressbook.tests;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +27,7 @@ public class GroupModificationTests  extends TestBase {
 	
   
   
-  @Test
+  @Test  (enabled = false)
   public void testGroupModification() {
 	  
 	  
@@ -55,8 +56,30 @@ public class GroupModificationTests  extends TestBase {
 	  
   }
 
-
+  @Test   
+  public void testGroupModification2() {
   
+	  Set <GroupData> before = app.group().allGroupslist() ;
+	  GroupData modifiedGroup = before.iterator().next();
+	
+	  GroupData newGroup = new GroupData()
+			  .withId( modifiedGroup.getId())
+			  .withName("testSS")
+			  .withHeader("testSS")
+			  .withFooter("testSS");
+
+		
+	  app.group().modify( newGroup);	  
+	  Set <GroupData>  after = app.group().allGroupslist();
+      Assert.assertEquals(after.size()  , before.size());
+      
+    
+	  before.remove(modifiedGroup);
+	  before.add(newGroup);  
+	 
+	   Assert.assertEquals( before,    after);
+	  
+  }
   
   
 }
