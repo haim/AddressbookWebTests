@@ -2,13 +2,13 @@ package apilipen.addressbook.model;
 
 public class GroupData {
 	
-	private String id;
+	private int id;
 	private String name;
 	private String header;
 	private String footer;
 	
 	
-	public GroupData(String id, String name, String header, String footer) {
+	public GroupData(int id, String name, String header, String footer) {
 		this.id = id;
 		this.name = name;
 		this.header = header;
@@ -16,13 +16,13 @@ public class GroupData {
 	}
 	
 	public GroupData( String name, String header, String footer) {
-		this.id = null;
+		this.id = 0;
 		this.name = name;
 		this.header = header;
 		this.footer = footer;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
@@ -46,13 +46,13 @@ public class GroupData {
 
 
 @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + id;
+	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	return result;
+}
 
 
 
@@ -66,10 +66,7 @@ public class GroupData {
 		if (getClass() != obj.getClass())
 			return false;
 		GroupData other = (GroupData) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -77,6 +74,11 @@ public class GroupData {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public void setId(int ide) {
+		// TODO Auto-generated method stub
+		this.id = ide;
 	}
 
 
