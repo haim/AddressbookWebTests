@@ -28,7 +28,7 @@ public class GroupDeletionTests extends TestBase {
     }
  
     
-    
+   // "Comparesing whole Lists of groups before and after deletion" 
     @Test
     public void GroupDeletionTests2() {
     	  app.getNavigationHelper().gotoGroupPage();  
