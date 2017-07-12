@@ -77,15 +77,19 @@ public class GroupDeletionTests extends TestBase {
     }
 
 
+/*
+    Heshing - предварительная проверка  при помощи более быстрой операции:
+       проверка количества, до загрузки списка групп
 
+ */
 	@Test
 	public void GroupDeletionTests_v5_6() {
 		Groups before = app.group().all() ;
 		GroupData deletedGroup = before.iterator().next();
 
 		app.group().delete(deletedGroup);
+		assertEquals(app.group().сount() ,before.size() - 1);
 		Groups  after = app.group().all();
-		assertEquals(after.size()  ,before.size() - 1);
 		assertThat(after, equalTo(before.without(deletedGroup)));
 
 	}
