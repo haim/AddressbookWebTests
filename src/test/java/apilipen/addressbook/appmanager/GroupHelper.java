@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import apilipen.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -149,7 +150,20 @@ public class GroupHelper extends HelperBase {
 		return groups;
 	}
 
+	public Groups all() {
+		Groups groups = new Groups() ;
+		List <WebElement> elements  = driver.findElements(By.cssSelector("span.group"));
+		for ( WebElement element : elements){
+			String name = element.getText();
 
+			int id = Integer.parseInt(element.findElement(By.tagName("input"))
+				.getAttribute("value"));
+			groups.add(new GroupData ().withId(id).withName(name));
+			System.out.println(name +" " +  id);
+		}
+
+		return groups;
+	}
 	
 	
 }

@@ -2,11 +2,18 @@ package apilipen.addressbook.tests;
 import java.util.List;
 import java.util.Set;
 
+import apilipen.addressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import apilipen.addressbook.model.GroupData;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
     
@@ -39,7 +46,8 @@ public class GroupDeletionTests extends TestBase {
    // "Comparesing whole Lists of groups before and after deletion" 
     @Test(enabled = false)
     public void GroupDeletionTests2() {
-    
+
+
     	  
   		List <GroupData> before = app.group().list() ;
   		int index = before.size() - 1;
@@ -53,20 +61,33 @@ public class GroupDeletionTests extends TestBase {
     
     }
 
-    @Test
-    public void GroupDeletionTests3() {  
-  		Set <GroupData> before = app.group().allGroupslist() ;
-  		GroupData deletedGroup = before.iterator().next();
-  	
-  		app.group().delete(deletedGroup);
-  		Set <GroupData>  after = app.group().allGroupslist();
-    	Assert.assertEquals(after.size()  ,before.size() - 1);
-         
-        before.remove(deletedGroup);
-        Assert.assertEquals(before, after);
-          
-    
+    @Test (enabled = false)
+    public void GroupDeletionTests3() {
+		Set <GroupData> before = app.group().allGroupslist() ;
+		GroupData deletedGroup = before.iterator().next();
+
+		app.group().delete(deletedGroup);
+		Set <GroupData>  after = app.group().allGroupslist();
+		Assert.assertEquals(after.size()  ,before.size() - 1);
+
+		before.remove(deletedGroup);
+		Assert.assertEquals(before, after);
+
+
     }
 
+
+
+	@Test
+	public void GroupDeletionTests_v5_6() {
+		Groups before = app.group().all() ;
+		GroupData deletedGroup = before.iterator().next();
+
+		app.group().delete(deletedGroup);
+		Groups  after = app.group().all();
+		assertEquals(after.size()  ,before.size() - 1);
+		assertThat(after, equalTo(before.without(deletedGroup)));
+
+	}
   
 } // End of class

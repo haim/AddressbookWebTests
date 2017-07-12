@@ -5,11 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import apilipen.addressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import apilipen.addressbook.model.GroupData;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests  extends TestBase {
 	
@@ -56,7 +61,7 @@ public class GroupModificationTests  extends TestBase {
 	  
   }
 
-  @Test   
+  @Test   (enabled = false)
   public void testGroupModification2() {
   
 	  Set <GroupData> before = app.group().allGroupslist() ;
@@ -80,6 +85,30 @@ public class GroupModificationTests  extends TestBase {
 	   Assert.assertEquals( before,    after);
 	  
   }
-  
-  
+
+
+
+	@Test
+	public void testGroupModificationv5_6() {
+
+		Groups before = app.group().all();
+		GroupData modifiedGroup = before.iterator().next();
+
+		GroupData newGroup = new GroupData()
+			.withId(modifiedGroup.getId())
+			.withName("testSS")
+			.withHeader("testSS")
+			.withFooter("testSS");
+
+
+		app.group().modify(newGroup);
+		Groups after = app.group().all();
+		Assert.assertEquals(after.size(), before.size());
+		assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(newGroup)));
+
+	}
+
+
+
+
 }

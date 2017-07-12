@@ -5,9 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//import org.hamcrest.CoreMatchers;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import apilipen.addressbook.model.Groups;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import apilipen.addressbook.model.GroupData;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class GroupCreationTests  extends TestBase {
 	
@@ -32,20 +38,24 @@ public class GroupCreationTests  extends TestBase {
 	}
 
 
-	@Test
+	@Test					// video 5.6
 	public void testGroupCreation3() {
 		app.goTo().groupPage();
-		Set<GroupData> before = app.group().allGroupslist(); //	 with new method getGroupList()
+		Groups before = app.group().all(); //	 with new method getGroupList()
 		GroupData newGroup = new GroupData().withName("testR").withHeader("testR").withFooter("testR");
 		app.group().create(newGroup);
 
-		Set<GroupData> after = app.group().allGroupslist();
-		Assert.assertEquals(after.size(), before.size() + 1);
+		Groups after = app.group().all();
+		//Assert.assertEquals(after.size(), before.size() + 1);
+		 assertThat(after.size(), equalTo( before.size() + 1));
 
-		newGroup.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-		before .add(newGroup);
+		            //newGroup.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
 
-		  Assert.assertEquals( before, after);
+
+		//  Assert.assertEquals( before, after);
+		//  MatcherAssert.assertThat(after, CoreMatchers.equalTo(before));
+		 assertThat(after, equalTo(
+			    before.withAdded(newGroup.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 	}
 
 	
