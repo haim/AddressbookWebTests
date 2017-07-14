@@ -33,8 +33,6 @@ public class ContactData {
 		return group;
 	}
 
-
-
 	public String getAddr() {
 		return addr;
 	}

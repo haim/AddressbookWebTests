@@ -1,9 +1,8 @@
 package apilipen.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+
+import java.util.List;
 
 public class HelperBase {
 
@@ -12,6 +11,15 @@ public class HelperBase {
 	public HelperBase(WebDriver wd) {
 		// TODO Auto-generated constructor stub
 		this.driver = wd;
+	}
+
+
+	protected WebElement findElement(By locator) {
+		return driver.findElement(locator);
+	}
+
+	protected List <WebElement>findWebElements(By locator) {
+		return driver.findElements(locator);
 	}
 
 	protected void clickElement(By locator) {

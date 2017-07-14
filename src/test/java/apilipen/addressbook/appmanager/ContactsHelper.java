@@ -2,10 +2,14 @@ package apilipen.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import apilipen.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsHelper extends HelperBase {
 
@@ -41,8 +45,10 @@ public class ContactsHelper extends HelperBase {
 
 
 
-	public void selectContact() {
-		clickElement(By.name("selected[]" ));
+	public void selectContact( int index) {
+
+		findWebElements(By.name("selected[]")).get(index).click();
+	//	это можно перенести в базовый класс как clickSelectedElementFromList
 		
 	}
 
@@ -52,9 +58,9 @@ public class ContactsHelper extends HelperBase {
 		
 	}
 
-	public void initUpdateContuct() {
-
-		clickElement(By.xpath("//a/img[@title=\"Edit\"]"));
+	public void initUpdateContuct(int index) {
+		findWebElements(By.xpath("//a/img[@title=\"Edit\"]")).get(index).click();
+		//clickElement(By.xpath("//a/img[@title=\"Edit\"]"));
 	}
 
 	public void submitContactDeleation() {
@@ -74,7 +80,27 @@ public class ContactsHelper extends HelperBase {
 	}
 
 
-	
-	
+	public int countContacts() {
 
+		return  driver.findElements(By.name("selected[]")).size();
+	}
+
+	public List<ContactData> getContactList() {
+
+		//Create list of object - contacts on the page
+List <ContactData> contacts = new ArrayList<ContactData>();
+		// Create list of WebElements by locator
+List <WebElement> elements = driver.findElements(By.name("entry")); // find parent element
+		for (WebElement element : elements) {
+
+			String lasttname = element.findElement(By.xpath("//td[2]")).getText();
+			String firstname = element.findElement(By.xpath("//td[3]")).getText();
+
+// Create object of ContactData type
+			ContactData contact = new ContactData(firstname, lasttname, null, null, null, null);
+
+			contacts.add(contact);
+		}
+  return contacts;
+	}
 }

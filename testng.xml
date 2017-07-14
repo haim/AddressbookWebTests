@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="suite">
+    <test name="test">
+    <!--
+        <groups>
+            <run>
+                <include name="csv"/>
+                <include name="properties"/>
+                <include name="xml"/>
+                <include name="text"/>
+                <include name="json"/>
+            </run>
+            /Users/anna/NewNeonWorks/AddressbookWebTests/src/test/java/apilipen/addressbook/tests/GroupCreationTests.java
+        </groups>
+
+        -->
+        <classes>
+            <class name="apilipen.addressbook.tests.GroupCreationTests">
+
+            </class>
+        </classes>
+    </test>
+</suite>

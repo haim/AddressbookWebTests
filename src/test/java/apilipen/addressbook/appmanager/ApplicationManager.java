@@ -181,7 +181,7 @@ public class ApplicationManager   {
 	}
 
 	
-
+// those method was getters :
 	public GroupHelper group() {
 		return groupHelper;
 	}
@@ -191,7 +191,8 @@ public class ApplicationManager   {
 		return navigationHelper;
 	}
 	
-	public ContactsHelper getContactsHelper() {
+	public ContactsHelper contact
+		() {
 		return contactsHelper;
 	}
 	
